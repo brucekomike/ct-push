@@ -1,0 +1,12 @@
+# config2 - ghcr.io/brucekomike cct images
+# Lines starting with # are skipped.
+# Remove the # at the start of a line to include that image.
+
+ghcr.io/brucekomike/cct-ct-noble-cd:latest
+ghcr.io/brucekomike/cct-ct-noble:latest
+ghcr.io/brucekomike/cct-ct-resolute:latest
+ghcr.io/brucekomike/cct-ct-cd:latest
+ghcr.io/brucekomike/cct-ct-resolute-plain-cd:latest
+ghcr.io/brucekomike/cct-ct-noble-plain:latest
+ghcr.io/brucekomike/cct-ct-noble-plain-cd:latest
+ghcr.io/brucekomike/cct-ct-resolute-plain:latest

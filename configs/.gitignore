@@ -1,0 +1,4 @@
+# Ignore user-customised configs; only keep the placeholder
+*
+!.gitkeep
+!.gitignore
