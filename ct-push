@@ -1,0 +1,44 @@
+#!/usr/bin/env bash
+# ct-push: push container images to a remote host via docker save/load over SSH
+# Usage: ct-push <host> <config>
+
+set -euo pipefail
+
+if [[ $# -lt 2 ]]; then
+    echo "Usage: $0 <host> <config>" >&2
+    exit 1
+fi
+
+HOST="$1"
+CONFIG="$2"
+
+if [[ ! -f "$CONFIG" ]]; then
+    echo "Error: config file '$CONFIG' not found." >&2
+    exit 1
+fi
+
+images=()
+while IFS= read -r line; do
+    # Strip inline comments and leading/trailing whitespace
+    line="${line%%#*}"
+    line="${line#"${line%%[![:space:]]*}"}"
+    line="${line%"${line##*[![:space:]]}"}"
+    [[ -z "$line" ]] && continue
+    images+=("$line")
+done < "$CONFIG"
+
+if [[ ${#images[@]} -eq 0 ]]; then
+    echo "No images to push (config is empty or all lines are commented out)." >&2
+    exit 0
+fi
+
+echo "Pulling images locally..."
+for img in "${images[@]}"; do
+    echo "  docker pull $img"
+    docker pull "$img"
+done
+
+echo "Transferring images to $HOST ..."
+docker save "${images[@]}" | ssh "$HOST" "docker load"
+
+echo "Done."

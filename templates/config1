@@ -1,0 +1,12 @@
+# config1 - misc services
+# Lines starting with # are skipped.
+# Remove the # at the start of a line to include that image.
+
+jonasal/nginx-certbot:latest
+nginx:trixie
+triliumnext/trilium:latest
+ghcr.io/brucekomike/expand-mediawiki-fpm:1.46
+ghcr.io/brucekomike/expand-mediawiki:1.46
+ghcr.io/brucekomike/frp-ct-server:latest
+# ghcr.io/brucekomike/frp-ct-clientlatest
+mariadb:12.1.2-noble
